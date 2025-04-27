@@ -1,10 +1,10 @@
-# 🚀 Project Altair
+# Project Altair
 
 Nano Satellite Simulator — Embedded STM32 Firmware + C++ Ground Station
 
 ---
 
-## 📋 Overview
+## Overview
 
 Project Altair simulates a NanoSat device:
 - **STM32 firmware** collects sensor data, handles modes (Normal/Error/Safe), and communicates over UART.
@@ -13,7 +13,7 @@ Project Altair simulates a NanoSat device:
 
 ---
 
-## 🛰️ Main Features
+## Main Features
 
 - Beaconing and telemetry transmission
 - Sensor sampling: Temperature, Humidity, Light, VBat
@@ -24,7 +24,7 @@ Project Altair simulates a NanoSat device:
 
 ---
 
-## 📡 UART Packet Format
+## UART Packet Format
 
 | Field      | Size  | Description         |
 |------------|-------|---------------------|
@@ -36,7 +36,22 @@ Project Altair simulates a NanoSat device:
 
 ---
 
-## ⚙️ Build & Flash
+## Main Tasks
+
+| Task                  | Purpose                                              |
+|-----------------------|-------------------------------------------------------|
+| `Init_Task`            | Boot, wait for time sync, start subsystems            |
+| `Sampler_Task`         | Sample sensors + format samples                      |
+| `DHT_Task`             | Read DHT sensor (Temperature + Humidity)             |
+| `LoggerFeeder_Task`    | Queue sensor logs for SD card writing                |
+| `Logger_Task`          | Write logs/events to SD card                         |
+| `Controller_Task`      | Evaluate system mode from latest sample              |
+| `EventManager_Task`    | Handle system events + indicate with LED/Buzzer      |
+| `Communicator_Task`    | Manage UART packet reception and transmission        |
+
+---
+
+## Build & Flash
 
 ### NanoSat Firmware
 - STM32CubeIDE Project
